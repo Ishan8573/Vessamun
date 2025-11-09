@@ -29,6 +29,10 @@ public class MenuUI : MonoBehaviour
     private void ExitGame()
     {
         Debug.Log("Exit button clicked");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }
