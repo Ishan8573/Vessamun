@@ -7,6 +7,7 @@ public class Bootstrap : MonoBehaviour
 
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         gsm = GetComponent<GameStateMachine>();
         gsm.ChangeState(new MenuState(gsm)); 
     }

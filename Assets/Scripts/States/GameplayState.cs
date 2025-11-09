@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameplayState : GameState
 {
@@ -22,6 +23,7 @@ public class GameplayState : GameState
 
     private void BackPressed(InputAction.CallbackContext ctx)
     {
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         Debug.Log("Returning to Menu (New Input System)");
         gsm.ChangeState(new MenuState(gsm));
     }

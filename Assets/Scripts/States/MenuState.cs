@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MenuState : GameState
 {
@@ -23,6 +24,7 @@ public class MenuState : GameState
 
     private void OnStartPressed(InputAction.CallbackContext ctx)
     {
+        SceneManager.LoadScene("Gameplay", LoadSceneMode.Single);
         Debug.Log("Start game pressed (New Input System)");
         gsm.ChangeState(new GameplayState(gsm));
     }
