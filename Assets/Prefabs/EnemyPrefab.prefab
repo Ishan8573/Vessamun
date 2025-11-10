@@ -103,5 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2194de498a5415eaefb49ecd4dc809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  data: {fileID: 0}
-  currentHP: 0
+  data: {fileID: 11400000, guid: 4109fcc53fcba4fc38d0910c8d94f730, type: 2}
+  currentHP: 30
+  hpTextPrefab: {fileID: 2438840401044432704, guid: a033e6ab9aff24680863ae995d4674d7, type: 3}
