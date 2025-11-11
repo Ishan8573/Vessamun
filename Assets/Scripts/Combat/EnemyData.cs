@@ -6,6 +6,6 @@ public class EnemyData : ScriptableObject
 {
     public string enemyName;
     public Sprite sprite;
-    public int maxHP = 30;
+    public int maxHP = 40;
     public bool isBoss = false;
 }

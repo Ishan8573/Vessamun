@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 1015097475}
   - component: {fileID: 1015097474}
   - component: {fileID: 1015097473}
+  - component: {fileID: 1015097476}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -250,7 +251,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 208a8e7e6d45648158959246388aa4d8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EncounterGenerator
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawn
   enemyToSpawn: {fileID: 11400000, guid: 4109fcc53fcba4fc38d0910c8d94f730, type: 2}
   enemyPrefab: {fileID: 8095312662052554324, guid: d08576cd4ff324291a13cbabdefe2b05, type: 3}
   spawnPoint: {fileID: 1687395810}
@@ -269,6 +270,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1015097476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015097472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd9465cdbc71c4b5884c924fe1aee08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageTester
 --- !u!1 &1448024983
 GameObject:
   m_ObjectHideFlags: 0
