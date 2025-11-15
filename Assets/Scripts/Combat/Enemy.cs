@@ -42,6 +42,15 @@ public class Enemy : MonoBehaviour
             hpTextInstance.text = $"HP: {currentHP}";
         }
     }
+
+    public void TakeDamage(int amount)
+    {
+        amount = Mathf.Max(0, amount);
+        currentHP = Mathf.Max(0, currentHP - amount);
+
+        if (currentHP == 0) 
+            Debug.Log($"{data.enemyName} defeated!");
+    }
 }
 
 
