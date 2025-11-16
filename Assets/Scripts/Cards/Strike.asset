@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11a9e585cbfff41bfbcfa40f356b5814, type: 3}
+  m_Name: Strike
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: Strike
+  description: 5 damage.
+  type: 0
+  cost: 1
+  effect: {fileID: 11400000, guid: bce581b36a5734923a863e3deb90aa8d, type: 2}
