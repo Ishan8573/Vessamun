@@ -25,7 +25,7 @@ public class GameStateMachine : MonoBehaviour
 
     private void OnDestroy()
     {
-        currentState?.Exit();   // let the active state unsubscribe first
+        currentState?.Exit();  
         Input.Dispose();
     }
 }

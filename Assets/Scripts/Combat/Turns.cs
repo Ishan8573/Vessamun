@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ public class TurnManager : MonoBehaviour
 
     [Header("Timing")]
     [SerializeField] private float enemyDelay = 0.7f;
+    [SerializeField] private HandManager hand;
 
     private bool battleOver = false;
 
@@ -24,8 +26,12 @@ public class TurnManager : MonoBehaviour
         if (player == null)
             player = FindObjectOfType<PlayerHealth>();
 
+        if (hand == null)
+            hand = FindAnyObjectByType<HandManager>();
+
         Debug.Log("Turn Player");
         Current = Turn.Player;
+        hand?.DrawStartingHand();
     }
 
     private void Update()
@@ -38,7 +44,14 @@ public class TurnManager : MonoBehaviour
             {
                 Debug.Log("Player Acted");
                 if (enemy != null) enemy.TakeDamage(5);
-                SwitchToEnemy();
+
+                EndPlayerTurn();
+            }
+
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                Debug.Log("Player turn ended.");
+                EndPlayerTurn();
             }
         }
     }
@@ -58,6 +71,7 @@ public class TurnManager : MonoBehaviour
         CheckWinLose();
         if (!battleOver)
         {
+            hand?.DrawStartingHand();
             Current = Turn.Player;
             Debug.Log("Turn Player");
         }
@@ -75,5 +89,11 @@ public class TurnManager : MonoBehaviour
             battleOver = true;
             Debug.Log("Defeat!");
         }
+    }
+
+    private void EndPlayerTurn()
+    {
+        hand?.DiscardHand();
+        SwitchToEnemy();
     }
 }
