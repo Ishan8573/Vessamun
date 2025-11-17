@@ -14,6 +14,7 @@ public class TurnManager : MonoBehaviour
     [Header("Timing")]
     [SerializeField] private float enemyDelay = 0.7f;
     [SerializeField] private HandManager hand;
+    [SerializeField] private Energy energy;
 
     private bool battleOver = false;
 
@@ -28,9 +29,13 @@ public class TurnManager : MonoBehaviour
 
         if (hand == null)
             hand = FindAnyObjectByType<HandManager>();
+        
+        if (energy == null)
+            energy = FindFirstObjectByType<Energy>();
 
         Debug.Log("Turn Player");
         Current = Turn.Player;
+        energy?.Refill();
         hand?.DrawStartingHand();
     }
 
@@ -71,6 +76,7 @@ public class TurnManager : MonoBehaviour
         CheckWinLose();
         if (!battleOver)
         {
+            energy?.Refill();
             hand?.DrawStartingHand();
             Current = Turn.Player;
             Debug.Log("Turn Player");

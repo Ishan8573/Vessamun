@@ -12,6 +12,7 @@ public class HandManager : MonoBehaviour
 
     [SerializeField] private PlayerHealth player;
     private Enemy enemy; 
+    [SerializeField] private Energy energy;
 
     private readonly List<CardView> views = new();
 
@@ -20,6 +21,7 @@ public class HandManager : MonoBehaviour
     {
         if (deck == null) deck = FindObjectOfType<Deck>();
         if (player == null) player = FindObjectOfType<PlayerHealth>();
+        if (energy == null) energy = FindFirstObjectByType<Energy>();
 
         DrawStartingHand();
     }
@@ -53,7 +55,17 @@ public class HandManager : MonoBehaviour
 
     private void OnPlayCard(CardData card)
     {
-        Enemy enemy = FindAnyObjectByType<Enemy>();
+        if (energy != null)
+        {
+            if(!energy.CanAfford(card.cost))
+            {
+                Debug.Log($"Not enough energy to play {card.cardName}. " + 
+                $"Need {card.cost}, have {energy.CurrentEnergy}");
+                return;
+            }
+            energy.Spend(card.cost);
+        }
+        Enemy enemy = FindFirstObjectByType<Enemy>();
         var ctx = new CardContext {
             player = player,
             enemy = enemy
@@ -68,6 +80,6 @@ public class HandManager : MonoBehaviour
         {
             views.Remove(view);
             Destroy(view.gameObject); 
-            }
+        }
     }
 }
