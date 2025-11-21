@@ -33,6 +33,9 @@ public class TurnManager : MonoBehaviour
         if (energy == null)
             energy = FindFirstObjectByType<Energy>();
 
+        if (enemy != null)
+            enemy.ChooseRandomIntent();
+
         Debug.Log("Turn Player");
         Current = Turn.Player;
         energy?.Refill();
@@ -71,11 +74,19 @@ public class TurnManager : MonoBehaviour
     private void EnemyAct()
     {
         if (battleOver) return;
-        Debug.Log("Enemy Acted");
+        if (enemy != null && player != null)
+        {
+            enemy.ExecuteCurrentIntent(player);
+        }
+        else
+        {
+            Debug.Log("Enemy/Player missing");
+        }
 
         CheckWinLose();
         if (!battleOver)
         {
+            enemy.ChooseRandomIntent();
             energy?.Refill();
             hand?.DrawStartingHand();
             Current = Turn.Player;

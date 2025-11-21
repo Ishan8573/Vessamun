@@ -1,11 +1,29 @@
 using UnityEngine;
 using TMPro;  
 
+public enum EnemyIntentType
+{   
+    attack
+}
+
+[System.Serializable]
+public class EnemyIntent
+{
+    public EnemyIntentType type;
+    public int value;
+    public string description;
+}
+
 [RequireComponent(typeof(SpriteRenderer))]
 public class Enemy : MonoBehaviour
 {
     public EnemyData data;
     public int currentHP;
+
+    [Header("Intents")]
+    [SerializeField] private EnemyIntent[] possibleIntents;
+    private EnemyIntent currentIntent;
+    public EnemyIntent CurrentIntent => currentIntent;
 
     [Header("UI")]
     public GameObject hpTextPrefab;     
@@ -17,6 +35,11 @@ public class Enemy : MonoBehaviour
         currentHP = d.maxHP;
         GetComponent<SpriteRenderer>().sprite = d.sprite;
         name = $"Enemy_{d.enemyName}";
+
+        if (possibleIntents != null && possibleIntents.Length > 0 && currentIntent == null)
+        {
+            ChooseRandomIntent();
+        }
 
         if (hpTextPrefab != null)
         {
@@ -40,6 +63,37 @@ public class Enemy : MonoBehaviour
         {
             hpTextInstance.transform.localPosition = new Vector3(0f, 1.5f, 0f);
             hpTextInstance.text = $"HP: {currentHP}";
+        }
+    }
+
+    public void ChooseRandomIntent()
+    {
+        if (possibleIntents == null || possibleIntents.Length == 0)
+        {
+            Debug.LogWarning("Enemy has no intents");
+            currentIntent = null;
+            return;
+        }
+        currentIntent = possibleIntents[Random.Range(0, possibleIntents.Length)];
+        Debug.Log($"Enemy chose intent: {currentIntent.description}");
+    }
+
+    public void ExecuteCurrentIntent(PlayerHealth player)
+    {
+        if (currentIntent == null)
+        {
+            Debug.LogWarning("Enemy has no intent to execute");
+        }
+
+        switch (currentIntent.type)
+        {
+            case EnemyIntentType.attack:
+                if (player != null)
+                {
+                    Debug.Log($"Enemy executes Attack for {currentIntent.value}");
+                    player.takeDamage(currentIntent.value);
+                }
+                break;
         }
     }
 

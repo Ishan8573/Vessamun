@@ -8,8 +8,25 @@ public class PlayerHPHUD : MonoBehaviour
 
     private void Start()
     {
-        if (player != null && label != null)
-            label.text = $"HP: {player.CurrentHP}";
+        if (player == null)
+        player = FindFirstObjectByType<PlayerHealth>();
+
+        if (label == null)
+        label = GetComponent<TMP_Text>();
+
+        UpdateLabel();
+    }
+
+    private void Update()
+    {
+        UpdateLabel();
+    }
+
+    private void UpdateLabel()
+    {
+        if (player == null || label == null)
+        return;
+        label.text = $"HP: {player.CurrentHP}";
     }
 }
 

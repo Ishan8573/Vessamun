@@ -105,4 +105,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   data: {fileID: 11400000, guid: 4109fcc53fcba4fc38d0910c8d94f730, type: 2}
   currentHP: 40
+  possibleIntents:
+  - type: 0
+    value: 6
+    description: Atack for 6
+  - type: 0
+    value: 10
+    description: Attack for 10
   hpTextPrefab: {fileID: 2438840401044432704, guid: a033e6ab9aff24680863ae995d4674d7, type: 3}
