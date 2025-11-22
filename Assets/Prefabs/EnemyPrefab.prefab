@@ -112,4 +112,7 @@ MonoBehaviour:
   - type: 0
     value: 10
     description: Attack for 10
+  - type: 1
+    value: 8
+    description: Gain 8 block
   hpTextPrefab: {fileID: 2438840401044432704, guid: a033e6ab9aff24680863ae995d4674d7, type: 3}

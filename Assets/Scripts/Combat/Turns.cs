@@ -84,8 +84,10 @@ public class TurnManager : MonoBehaviour
         }
 
         CheckWinLose();
+
         if (!battleOver)
         {
+            player.ResetBlock();
             enemy.ChooseRandomIntent();
             energy?.Refill();
             hand?.DrawStartingHand();

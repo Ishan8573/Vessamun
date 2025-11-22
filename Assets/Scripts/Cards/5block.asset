@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ede051dab3f7f4bdb947dcd43917628a, type: 3}
-  m_Name: 10
-  m_EditorClassIdentifier: Assembly-CSharp::DealDamageEffect
-  amount: 10
+  m_Script: {fileID: 11500000, guid: fed7cc530bb784b85878212495b28247, type: 3}
+  m_Name: 5block
+  m_EditorClassIdentifier: Assembly-CSharp::GainBlockEffect
+  amount: 5

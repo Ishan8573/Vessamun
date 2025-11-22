@@ -3,7 +3,8 @@ using TMPro;
 
 public enum EnemyIntentType
 {   
-    attack
+    attack,
+    block
 }
 
 [System.Serializable]
@@ -19,6 +20,7 @@ public class Enemy : MonoBehaviour
 {
     public EnemyData data;
     public int currentHP;
+    public int CurrentBlock {get; private set;}
 
     [Header("Intents")]
     [SerializeField] private EnemyIntent[] possibleIntents;
@@ -33,6 +35,7 @@ public class Enemy : MonoBehaviour
     {
         data = d;
         currentHP = d.maxHP;
+        CurrentBlock = 0;
         GetComponent<SpriteRenderer>().sprite = d.sprite;
         name = $"Enemy_{d.enemyName}";
 
@@ -62,7 +65,7 @@ public class Enemy : MonoBehaviour
         if (hpTextInstance != null)
         {
             hpTextInstance.transform.localPosition = new Vector3(0f, 1.5f, 0f);
-            hpTextInstance.text = $"HP: {currentHP}";
+            hpTextInstance.text = $"HP: {currentHP}\nBlock: {CurrentBlock}";
         }
     }
 
@@ -94,17 +97,47 @@ public class Enemy : MonoBehaviour
                     player.takeDamage(currentIntent.value);
                 }
                 break;
+
+            case EnemyIntentType.block: 
+                Debug.Log($"Enemy gains {currentIntent.value} block");
+                AddBlock(currentIntent.value);
+                break;
         }
     }
-
+    
     public void TakeDamage(int amount)
     {
         amount = Mathf.Max(0, amount);
-        currentHP = Mathf.Max(0, currentHP - amount);
+        int damageLeft = amount;
 
-        if (currentHP == 0) 
-            Debug.Log($"{data.enemyName} defeated!");
+        if (CurrentBlock > 0 && damageLeft > 0)
+        {
+            int beforeBlock = CurrentBlock;
+            int blocked = Mathf.Min(CurrentBlock, damageLeft);
+            CurrentBlock -= blocked;
+            damageLeft -= blocked;
+            Debug.Log($"Enemy block absorbed {blocked} damage: {beforeBlock} = {CurrentBlock}");
+        }
+
+        if (damageLeft > 0)
+        {
+            int beforeHP = currentHP;
+            currentHP = Mathf.Max(0, currentHP - damageLeft);
+            Debug.Log($"{data.enemyName} took {damageLeft} damage: {beforeHP} = {currentHP}");
+
+            if (currentHP == 0)
+                Debug.Log($"{data.enemyName} defeated!");
+        }
     }
+
+    public void AddBlock (int amount)
+    {
+        amount = Mathf.Max(0, amount);
+        int before = CurrentBlock;
+        CurrentBlock += amount;
+        Debug.Log($"{data.enemyName} gained {amount} block: {before} = {CurrentBlock}");
+    }
+
 }
 
 

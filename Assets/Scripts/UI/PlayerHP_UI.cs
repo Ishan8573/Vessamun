@@ -26,7 +26,7 @@ public class PlayerHPHUD : MonoBehaviour
     {
         if (player == null || label == null)
         return;
-        label.text = $"HP: {player.CurrentHP}";
+        label.text = $"HP: {player.CurrentHP} | Block: {player.CurrentBlock}";
     }
 }
 
